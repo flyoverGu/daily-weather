@@ -15,7 +15,7 @@ async function fetchData() {
 function buildText(data) {
     let {f1, now} = data;
     let time = new Date();
-    return `早上好！今天${time.getMonth() + 1}月${time.Date()}日, 星期${f1.weekday}, ${f1.day_weather}, ${f1.day_weather}, ${f1.day_weather}, 气温${f1.night_air_temperature}到${f1.day_air_temperature}度,${f1.night_air_temperature}到${f1.day_air_temperature}度, ${f1.night_air_temperature}到${f1.day_air_temperature}度,${f1.night_air_temperature}到${f1.day_air_temperature}度, 空气质量${now.aqiDetail.pm2_5}, ${now.aqiDetail.quality}`;
+    return `早上好！今天${time.getMonth() + 1}月${time.getDate()}日, 星期${f1.weekday}, ${f1.day_weather}, ${f1.day_weather}, ${f1.day_weather}, 气温${f1.night_air_temperature}到${f1.day_air_temperature}度,${f1.night_air_temperature}到${f1.day_air_temperature}度, ${f1.night_air_temperature}到${f1.day_air_temperature}度,${f1.night_air_temperature}到${f1.day_air_temperature}度, 空气质量${now.aqiDetail.pm2_5}, ${now.aqiDetail.quality}`;
 }
 
 async function text2Mp3Url(text) {
@@ -32,6 +32,6 @@ async function start() {
     player.play(mp3Url);
 }
 
-schedule.scheduleJob('23 21 * * *', () => {
+schedule.scheduleJob('45 7 * * *', () => {
     start();
 });
