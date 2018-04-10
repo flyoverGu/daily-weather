@@ -1,9 +1,7 @@
-// import fetch from 'node-fetch';
 const fetch = require('node-fetch');
 const mpg = require('mpg123');
 const player = new mpg.MpgPlayer();
-
-player.play(__dirname+'/'+"someMusic.mp3");
+const schedule = require('node-schedule');
 
 async function fetchData() {
     let data = await fetch('https://saweather.market.alicloudapi.com/spot-to-weather?area=' + encodeURI('杭州'), {
@@ -21,7 +19,6 @@ function buildText(data) {
 
 async function text2Mp3Url(text) {
     let tokenData = await fetch('https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=74AIOZOQAo9WNKB3kEedD6Bi&client_secret=sYzxaGMsPirdFCEwNGvVHo5Bax9GeVhH').then(res => res.json());
-    console.log(tokenData);
     let url = 'http://tsn.baidu.com/text2audio?lan=zh&ctp=1&cuid=9476350&tok=' + tokenData.access_token + '&tex=' + text;
     return url;
 }
@@ -34,4 +31,6 @@ async function start() {
     player.play(mp3Url);
 }
 
-start();
+schedule.scheduleJob('23 21 * * *', () => {
+    start();
+});
